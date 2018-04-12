@@ -1,0 +1,26 @@
+{
+  "name": "chat2brand-cli",
+  "version": "0.1.0",
+  "description": "Command-line interface to Chat2Brand API calls",
+  "main": "index.js",
+  "bin": "./app/entry.js",
+  "scripts": {
+    "start": "./node_modules/.bin/babel-node ./app/entry",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Glöss",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2016": "^6.24.1",
+    "cli-progress": "^1.8.0",
+    "commander": "^2.15.1",
+    "dotenv": "^5.0.1",
+    "eventbusjs": "^0.2.0",
+    "inquirer": "^5.2.0",
+    "redis": "^2.8.0"
+  }
+}
