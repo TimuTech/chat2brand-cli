@@ -20,6 +20,8 @@ class MessageHandler {
         let type = 'from_client';
         let response = {};
         let loadingBar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic);
+        let replied = [];
+        let increase = 0;
 
         console.log(UIConstants.INFO_COLOUR, `Broadcasting a reply to chats ...`);
         loadingBar.start(MessageConstants.REPLY_REPEAT_LIMIT * limit, 0);
@@ -29,7 +31,7 @@ class MessageHandler {
                 else        response = await this.http.getMessages({ limit, channel_id, type });
 
                 let cacheReplied = await cache.getAsync(CacheConstants.KEY_CLIENTS_REPLIED);
-                let replied = cacheReplied ? cacheReplied.split(',') : [];
+                replied = cacheReplied ? cacheReplied.split(',') : [];
                 let data = response.data;
 
                 if (!data.data.length) break;
@@ -46,6 +48,7 @@ class MessageHandler {
                             await this.sendMessage({ client_id, text });
                             await this.http.markRead(chatMessage.id);
                             replied.push(client_id);
+                            ++increase;
                         }
                         catch (error) {
                             console.error(UIConstants.ERROR_COLOUR, error);
@@ -59,7 +62,7 @@ class MessageHandler {
             console.error(UIConstants.ERROR_COLOUR, error);
         }
         loadingBar.stop();
-        console.log(UIConstants.INFO_COLOUR, `Done broadcasting reply.`);
+        console.log(UIConstants.INFO_COLOUR, `Done broadcasting reply.\nIncreased by ${increase}.\nReplied to ${replied.length} clients total.`);
     }
     
     async sendMessage({ client_id, text }) {
