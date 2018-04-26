@@ -30,3 +30,5 @@ axios.defaults.headers.common = {
 };
 /* -- prepare events -- */
 global.EventBus = new (require('events'))();
+/* -- lodash -- */
+global._ = require('lodash');

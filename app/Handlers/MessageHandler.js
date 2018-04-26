@@ -3,14 +3,13 @@ import MessageConstants from '../Constants/MessageConstants';
 import UIConstants from '../Constants/UIConstants';
 import CacheConstants from '../Constants/CacheConstants';
 import MessageHttp from '../Http/MessageHttp';
-import { promisify } from 'util';
 import _cliProgress from 'cli-progress';
 
 class MessageHandler {
     constructor() {
         this.http = new MessageHttp;
-        this.broadcastReply = this.broadcastReply.bind(this);
-        this.sendMessage = this.sendMessage.bind(this);
+        this.broadcastReply = this.broadcastReply.bind(this);  // So that `this` refers to the class 'instance'
+        this.sendMessage = this.sendMessage.bind(this);  // So that `this` refers to the class 'instance'
     }
 
     async broadcastReply({ unread, message  }) {
@@ -60,9 +59,11 @@ class MessageHandler {
         }
         catch (error) {
             console.error(UIConstants.ERROR_COLOUR, error);
+            process.exit(1);
         }
         loadingBar.stop();
         console.log(UIConstants.INFO_COLOUR, `Done broadcasting reply.\nIncreased by ${increase}.\nReplied to ${replied.length} clients total.`);
+        process.exit();
     }
     
     async sendMessage({ client_id, text }) {

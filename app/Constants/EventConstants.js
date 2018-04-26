@@ -24,6 +24,21 @@ class EventConstants {
             message : 'Enter message to broadcast: '
         }]
     }
+    static get DIALOG_TRANSFER() { return 'dialog-transfer' }
+    static get DIALOG_TRANSFER_PROMPT() {
+        return [
+            {
+                type : 'input',
+                name : 'operatorOne',
+                message : 'Enter first operator ID: '
+            },
+            {
+                type : 'input',
+                name : 'operatorTwo',
+                message : 'Enter second operator ID: '
+            }
+        ]
+    }
 }
 
 export default EventConstants

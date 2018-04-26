@@ -21,6 +21,7 @@
     "dotenv": "^5.0.1",
     "eventbusjs": "^0.2.0",
     "inquirer": "^5.2.0",
+    "lodash": "^4.17.10",
     "redis": "^2.8.0"
   }
 }
