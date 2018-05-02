@@ -70,7 +70,7 @@ class MessageHandler {
         let transport = MessageConstants.DEFAULT_TRANSPORT;
         let channel_id = config.api.channel_id; 
 
-        console.log(UIConstants.INFO_COLOUR, `Sending message to client ${client_id} ...`);
+        // console.log(UIConstants.INFO_COLOUR, `Sending message to client ${client_id} ...`);
         try {
             await this.http.sendMessage({
                 client_id,
@@ -82,7 +82,7 @@ class MessageHandler {
         catch (error) {
             console.error(UIConstants.ERROR_COLOUR, error);
         }
-        console.log(UIConstants.INFO_COLOUR, `Done sending message.`);
+        // console.log(UIConstants.INFO_COLOUR, `Done sending message.`);
     }
 
 	listen() {

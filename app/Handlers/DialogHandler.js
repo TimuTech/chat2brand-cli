@@ -16,7 +16,7 @@ class DialogHandler {
         this.transferAll = this.transferAll.bind(this); // So that `this` refers to the class 'instance'
     }
     
-    async transferAll({ operatorOne, operatorTwo, clientNamed }) {
+    async transferAll({ operatorOne, operatorTwo, clientNamed, clientUnnamed }) {
         let limit = DialogConstants.FETCH_LIMIT;
         let type = 'from_client';
         let state = DialogConstants.STATE_CLOSED;
@@ -46,8 +46,12 @@ class DialogHandler {
                             if (client.assigned_name || (client.name && client.name.match(/^[a-z]+$/i))) // is alpha (name)
                                 await this.dialogHttp.updateDialog(message.dialog_id, { operator_id: operatorTwo, state }); 
                         }
+                        else if (clientUnnamed) {
+                            if (!client.assigned_name)
+                                await this.dialogHttp.updateDialog(message.dialog_id, { operator_id: operatorTwo, state }); 
+                        }
                         else {
-                            await this.dialogHttp.updateDialog(message.dialog_id, { operator_id: operatorTwo, state }); 
+                            await this.dialogHttp.updateDialog(message.dialog_id, { operator_id: operatorTwo, state });
                         }
                         loadingBar.increment();
                     }
